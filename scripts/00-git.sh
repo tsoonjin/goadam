@@ -7,6 +7,7 @@ set -o nounset
 
 # Variable declarations
 checkmark="(\xE2\x9C\x94)"
+repo_name=""
 
 if ! command -v gh &> /dev/null
 then
@@ -26,4 +27,6 @@ fi
 
 echo -e "Github Client: gh installed $checkmark\n"
 echo -e "1. Create New Github Repo"
-gh repo create
+gh repo create ${repo_name} -y
+mv ./${repo_name}/** .
+cp ./templates/.gitignore .
