@@ -5,10 +5,14 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-LOCAL_PORT=8000
-APP_PORT=7000
-APP_NAME=goadam
+export DOCKER_BUILDKIT=1
+export LOCAL_PORT=8000
+export APP_PORT=7000
+export APP_NAME=goadam
 
-docker build --build-arg APP_PORT=$APP_PORT --build-arg APP_NAME=$APP_NAME -t $APP_NAME . &&
+docker build \
+    --build-arg APP_PORT=$APP_PORT \
+    --build-arg APP_NAME=$APP_NAME \
+    --progress=plain -t $APP_NAME . &&
 
-docker run -p $LOCAL_PORT:$APP_PORT --env-file .env $APP_NAME
+docker run -p $LOCAL_PORT:$APP_PORT $APP_NAME
