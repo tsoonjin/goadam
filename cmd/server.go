@@ -65,7 +65,7 @@ func loadFlags() CLIFlags {
 
 func setupServer(port string) {
     http.HandleFunc("/", service.IndexHandler)
-    http.HandleFunc("/json2csv", service.JSON2CSVHandler)
+    http.HandleFunc("/request", service.JSON2CSVHandler)
     http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
 
