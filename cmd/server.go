@@ -26,20 +26,22 @@ type AppConfig struct {
 }
 
 func loadAppConfig(configPath string) (*AppConfig, error) {
-    appConfig := AppConfig{}
+    appConfig := AppConfig{
+        Version: "1.0.0",
+    }
     raw, err := ioutil.ReadFile(configPath)
     if err != nil {
-        log.Fatal("Error parsing app config")
-        return nil, err
+        log.Println("Error parsing app config")
     }
     json.Unmarshal(raw, &appConfig)
-    return &appConfig, nil
+    return &appConfig, err
 }
 
 func loadConfig() Config {
-    if err := godotenv.Load(); err != nil {
-        log.Fatal("Failed to load environment variable...")
-        panic(err)
+    if os.Getenv("ENV") != "production" {
+        if err := godotenv.Load(); err != nil {
+            log.Println("Failed to load .env file")
+        }
     }
     config := Config {
         Env: "develop",
