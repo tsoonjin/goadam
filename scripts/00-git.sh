@@ -29,4 +29,3 @@ echo -e "Github Client: gh installed $checkmark\n"
 echo -e "1. Create New Github Repo"
 gh repo create ${repo_name} -y
 mv ./${repo_name}/** .
-cp ./templates/.gitignore .
