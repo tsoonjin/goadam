@@ -1,4 +1,4 @@
-module tsoonjin/goadam
+module github.com/tsoonjin/goadam
 
 go 1.14
 
