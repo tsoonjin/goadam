@@ -4,9 +4,7 @@ services:
   server:
     build: ./
     ports:
-      - "8000:3000"
-    env_file:
-      - .env
+      - "8000:${APP_PORT}"
     environment:
       - ENV="production"
     command: /main

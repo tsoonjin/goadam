@@ -51,7 +51,7 @@ func loadConfig() Config {
     if env != "" {
         config.Env = env
     }
-    port := os.Getenv("PORT")
+    port := os.Getenv("APP_PORT")
     if port != "" {
         config.Port = port
     }
@@ -59,7 +59,7 @@ func loadConfig() Config {
 }
 
 func loadFlags() CLIFlags {
-    serviceName := flag.String("n", "goadam", "App name")
+    serviceName := flag.String("n", "goadam", "App Name")
     return CLIFlags {
         name: *serviceName,
     }

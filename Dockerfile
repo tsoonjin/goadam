@@ -31,7 +31,13 @@ FROM scratch
 
 COPY --from=builder /dist/main /
 
-EXPOSE 3000
+ARG APP_PORT=5000
+ARG APP_NAME=goadam
+
+ENV APP_NAME=$APP_NAME
+ENV APP_PORT=$APP_PORT
+
+EXPOSE $APP_PORT
 
 # Command to run
 ENTRYPOINT ["/main"]
