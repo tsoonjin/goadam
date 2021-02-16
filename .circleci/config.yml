@@ -9,9 +9,6 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.14
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
     working_directory: ~/repo
     steps:
       - checkout
@@ -35,6 +32,7 @@ jobs:
       - run:
           name: Docker Release
           command: |
+            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
             make docker
       - store_artifacts:
           path: ~/repo/out
