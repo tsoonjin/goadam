@@ -16,6 +16,27 @@ RESET  := $(shell tput -Txterm sgr0)
 run:
 	GO111MODULE=on $(GOCMD) run ./cmd/server.go
 
+compile:
+	GO111MODULE=on mkdir -p out/bin
+	# 32-Bit Systems
+	# FreeBDS
+	GO111MODULE=on GOOS=freebsd GOARCH=386 go build -o out/bin/$(BINARY_NAME)-freebsd-386 ./cmd
+	# MacOS
+	GO111MODULE=on GOOS=darwin GOARCH=386 go build -o bin/$(BINARY_NAME)-darwin-386 ./cmd
+	# Linux
+	GO111MODULE=on GOOS=linux GOARCH=386 go build -o bin/$(BINARY_NAME)-linux-386 ./cmd
+	# Windows
+	GO111MODULE=on GOOS=windows GOARCH=386 go build -o bin/$(BINARY_NAME)-windows-386 ./cmd
+	GO111MODULE=on # 64-Bit Systems
+	# FreeBDS
+	GO111MODULE=on GOOS=freebsd GOARCH=amd64 go build -o bin/$(BINARY_NAME)-freebsd-amd64 ./cmd
+	# MacOS
+	GO111MODULE=on GOOS=darwin GOARCH=amd64 go build -o bin/$(BINARY_NAME)-darwin-amd64 ./cmd
+	# Linux
+	GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o bin/$(BINARY_NAME)-linux-amd64 ./cmd
+	# Windows
+	GO111MODULE=on GOOS=windows GOARCH=amd64 go build -o bin/$(BINARY_NAME)-windows-amd64 ./cmd
+
 all: help
 
 lint: lint-go lint-dockerfile lint-yaml
