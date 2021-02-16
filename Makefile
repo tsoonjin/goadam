@@ -71,8 +71,8 @@ build:
 docker: docker-build docker-release
 
 docker-build:
-	DOCKER_BUILDKIT=1 docker build --rm \
-    	--build-arg APP_PORT=$(APP_PORT) \
+	docker build --rm \
+		--build-arg APP_PORT=$(APP_PORT) \
     	--build-arg APP_NAME=$(BINARY_NAME) \
     	--progress=plain -t $(BINARY_NAME) .
 

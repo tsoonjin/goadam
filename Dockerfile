@@ -1,5 +1,3 @@
-# syntax = docker/dockerfile:1.2
-
 FROM golang:alpine AS builder
 
 # Set necessary environmet variables needed for our image

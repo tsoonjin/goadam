@@ -5,7 +5,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-export DOCKER_BUILDKIT=1
 export LOCAL_PORT=8000
 export APP_PORT=7000
 export APP_NAME=goadam
