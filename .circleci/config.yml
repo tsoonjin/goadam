@@ -29,6 +29,7 @@ jobs:
       - run:
           name: Docker Release
           command: |
+            echo $DOCKERHUB_USERNAME
             make docker
       - store_artifacts:
           path: ~/repo/out
