@@ -2,4 +2,4 @@ tags
 .env
 bin/
 .env.secret
-secrets/
+out/

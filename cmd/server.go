@@ -14,6 +14,7 @@ import (
 
 type CLIFlags struct {
     name string
+    config string
 }
 
 type Config struct {
@@ -31,7 +32,7 @@ func loadAppConfig(configPath string) (*AppConfig, error) {
     }
     raw, err := ioutil.ReadFile(configPath)
     if err != nil {
-        log.Println("Error parsing app config")
+        log.Println("Failed to load app config. Using default config")
     }
     json.Unmarshal(raw, &appConfig)
     return &appConfig, err
@@ -60,8 +61,10 @@ func loadConfig() Config {
 
 func loadFlags() CLIFlags {
     serviceName := flag.String("n", "goadam", "App Name")
+    configFile := flag.String("c", "./config.json", "App config file")
     return CLIFlags {
         name: *serviceName,
+        config: *configFile,
     }
 }
 
@@ -74,7 +77,7 @@ func setupServer(port string) {
 func main() {
     config := loadConfig()
     cliFlags := loadFlags()
-    appConfig, _ := loadAppConfig("./config/app.json")
+    appConfig, _ := loadAppConfig(cliFlags.config)
     log.Println(fmt.Sprintf("Starting app %s@%s at port %s", cliFlags.name, appConfig.Version, config.Port))
     setupServer(config.Port)
 }
