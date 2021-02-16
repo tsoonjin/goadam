@@ -1,7 +1,12 @@
 version: 2.1
+
+workflows:
+  develop:
+    jobs:
+      - build:
+          context: app
 jobs:
   build:
-    context: app
     docker:
       - image: circleci/golang:1.14
         auth:
