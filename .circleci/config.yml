@@ -6,7 +6,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - setup_remote_docker
       - restore_cache:
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
