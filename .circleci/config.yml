@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Docker Release
           command: |
-            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker login -u $DOCKER_USERNAME --p $DOCKERHUB_PASSWORD
             make docker
       - store_artifacts:
           path: ~/repo/out
