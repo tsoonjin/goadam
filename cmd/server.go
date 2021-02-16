@@ -52,7 +52,7 @@ func loadConfig() Config {
     if env != "" {
         config.Env = env
     }
-    port := os.Getenv("APP_PORT")
+    port := os.Getenv("PORT")
     if port != "" {
         config.Port = port
     }

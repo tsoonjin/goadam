@@ -5,7 +5,26 @@ workflows:
     jobs:
       - build:
           context: app
+      - deploy:
+          context: app
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 jobs:
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            export HEROKU_API_KEY=$(HEROKU_API_KEY)
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            heroku container:login
+            heroku container:push -a $(HEROKU_APP_NAME) web
+            heroku container:release -a $(HEROKU_APP_NAME) web
   build:
     docker:
       - image: circleci/golang:1.14
